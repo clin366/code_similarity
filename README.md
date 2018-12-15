@@ -4,4 +4,4 @@ Running insturctions:
 
 python3 detect_sim.py -f1 path_to_first_code -f2 path_to_second_code
 
-The "report.pdf" is the report for this homework.
+The "BMI_final_report.pdf" is the report for this homework.
