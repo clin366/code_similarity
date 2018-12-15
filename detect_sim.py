@@ -12,6 +12,7 @@ This project is to detect the similarity between two python codes,
 using the Levenshtein ratio similarity and Universal Encoder similarity.
 """
 
+# function to read code file
 def read_code(code_path):
     sentences = []
     with open(code_path, 'r') as fi:
@@ -40,6 +41,7 @@ def read_code(code_path):
     
     return sentences
 
+# function to calculate similarity
 def cal_similarity(sentences, pair_sent):
     ratio_list = []
     for line in sentences:
@@ -59,6 +61,7 @@ def run_and_plot(session_, input_tensor_, messages_, encoding_tensor):
       encoding_tensor, feed_dict={input_tensor_: messages_})
     return message_embeddings_
 
+# function to get sentence embeddings
 def get_embedding(sentences, embed):
     similarity_input_placeholder = tf.placeholder(tf.string, shape=(None))
     similarity_message_encodings = embed(similarity_input_placeholder)
@@ -69,6 +72,7 @@ def get_embedding(sentences, embed):
                    similarity_message_encodings)
     return sentences_embeddings
 
+# function to get unicode similarity 
 def cal_unicode_similarity(sentences, pair_sent):
     ratio_list = []
     for line in sentences:
@@ -81,9 +85,7 @@ def cal_unicode_similarity(sentences, pair_sent):
         ratio_list.append(max_ratio)
     return ratio_list
 
-
-
-
+# main function to call the similarity
 def get_similarity(first_file, second_file):
     sentences = read_code(first_file)
     pair_sent = read_code(second_file)
@@ -110,10 +112,7 @@ def get_similarity(first_file, second_file):
     print("rev_uni_ratio: " + str(rev_uni_ratio))
     print("avg_uni_ratio: " + str( (uni_ratio + rev_uni_ratio)/2))
 
-
-
-
-
+# main function 
 parser = argparse.ArgumentParser()
 parser.add_argument("-f1", "--first_file_path", type = str, 
                     help="Path to the first code file")
